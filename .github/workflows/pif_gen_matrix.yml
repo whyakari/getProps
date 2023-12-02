@@ -21,32 +21,41 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install dos2unix python3 python3-pip
+        working-directory: ./getProps
         run: |
           pacman -Syu --noconfirm
           pacman -Sy sh --noconfirm
           pacman -Sy --noconfirm dos2unix python python-pip p7zip wget
 
       - name: Install protobuf
+        working-directory: ./getProps
         run: |
           pip install --upgrade pip --break-system-packages
           pip3 install -Iv protobuf==3.20.3 --break-system-packages
 
       - name: Make executable all script
+        working-directory: ./getProps
         run: chmod +x *.sh
 
       - name: Download last ota ${{ matrix.device_name }}
-        run: ./last_ota_build.sh ${{ matrix.device_name }}
+        working-directory: ./getProps
+        run: |
+          ./last_ota_build.sh ${{ matrix.device_name }}
 
       - name: Extract Image and build prop ${{ matrix.device_name }}
-        run: ./extract_images.sh
+        working-directory: ./getProps
+        run: |
+          ./extract_images.sh
 
       - name: Read final_name from file
+        working-directory: ./getProps
         id: read_name
         run: | 
           echo ::set-output name=final_name::$(cat build.txt)
         working-directory: ${{ github.workspace }}
 
       - name: Copy prop to result ${{ matrix.device_name }}
+        working-directory: ./getProps
         run: |
           cp ./**/**/{system,module}.prop .
           cp system.prop build.prop
@@ -54,6 +63,7 @@ jobs:
           sh ./gen_custom_pif.sh json build.prop
 
       - name: Create Pif ${{ matrix.device_name }}
+        working-directory: ./getProps
         run: |
           sh ./gen_custom_pif.sh json build.prop
 
