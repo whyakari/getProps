@@ -73,7 +73,7 @@ jobs:
         run: |
           pwd
           ls
-          ./gen_custom_pif.sh json home/runner/work/getProps/getProps/getProps/build.prop
+          ./gen_custom_pif.sh json /home/runner/work/getProps/getProps/getProps/build.prop
 
       - name: Upload Prop ${{ matrix.device_name }}
         uses: actions/upload-artifact@v3
