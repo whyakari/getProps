@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install dos2unix python3 python3-pip
-        run: pacman -Sy --noconfirm dos2unix python python-pip
+        run: pacman -Sy --noconfirm dos2unix python python-pip p7zip
 
       - name: Install protobuf
         run: |
