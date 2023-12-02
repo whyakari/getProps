@@ -58,7 +58,7 @@ esac;
 [ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.product.build.fingerprint);
 
 if [ -z "$FINGERPRINT" ]; then
-  if [ -f build.prop ]; then
+  if [ -f result/build.prop ]; then
     die "No fingerprint found, use a /system/build.prop to start";
   else
     die "No fingerprint found, unable to continue";
