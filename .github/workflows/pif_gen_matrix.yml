@@ -79,5 +79,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.read_name.outputs.final_name }}
-          path: result
+          path: /home/runner/work/getProps/getProps/getProps/build.prop
           if-no-files-found: error
