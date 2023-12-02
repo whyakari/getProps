@@ -27,6 +27,7 @@ chmod +x *.sh
 ./extract_images.sh
 ```
 
+6. Get your custom_pif.json
 ```
 ./gen_custom_pif.sh json your_build.prop
 ```
