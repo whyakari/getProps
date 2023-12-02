@@ -48,7 +48,6 @@ jobs:
           ./extract_images.sh
 
       - name: Read final_name from file
-        working-directory: ./getProps
         id: read_name
         run: | 
           echo ::set-output name=final_name::$(cat build.txt)
