@@ -69,6 +69,7 @@ jobs:
       - name: Create Pif ${{ matrix.device_name }}
         working-directory: ./getProps
         run: |
+          ls -la
           ./gen_custom_pif.sh json ./result/build.prop
 
       - name: Upload Prop ${{ matrix.device_name }}
