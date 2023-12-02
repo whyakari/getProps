@@ -79,29 +79,22 @@ jobs:
         working-directory: ./getProps
         run: ./extract_images.sh
 
-      - name: Read final_name from file
-        id: read_name
-        run: | 
-          echo ::set-output name=final_name::$(cat build.txt)
-        working-directory: ${{ github.workspace }}
-
       - name: Copy prop to result ${{ matrix.device_name }}
         working-directory: ./getProps
         run: |
-          mkdir -p result
           cp ./**/**/{system,module}.prop .
           mv system.prop build.prop
 
       - name: Create Pif Json 
         working-directory: ./getProps
         run: |
-          sh ./gen_custom_pif.sh json build.prop
+          sh ./gen_custom_pif.sh json build.prop 
           rm build.prop 
-          sudo mv custom.pif.json /result
+          echo "artifactPath=/home/runner/work/getProps/getProps/getProps/custom.pif.json" >> $GITHUB_ENV
 
       - name: Upload Pif ${{ matrix.device_name }}
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.read_name.outputs.final_name }}
-          path: result
+          name: artifact-pif
+          path: ${{ env.artifactPath }}
           if-no-files-found: error
