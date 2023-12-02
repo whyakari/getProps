@@ -47,12 +47,9 @@ jobs:
           mkdir -p result
           cp ./**/**/{system,module}.prop result/
           mv result/system.prop result/build.prop
-          cd result && pwd
-
-      - name: Create Pif Json
-        run: |
-          sh ./gen_custom_pif.sh json /home/runner/work/getProps/getProps/getProps/result/build.prop
-          cp custom.pif.json /home/runner/work/getProps/getProps/getProps/result/
+          # cd result && pwd && ls
+          sh ./gen_custom_pif.sh json result/build.prop
+          cp custom.pif.json result/
 
       - name: Upload Prop ${{ matrix.device_name }}
         uses: actions/upload-artifact@v3
