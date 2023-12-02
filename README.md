@@ -40,6 +40,9 @@ chmod +x *.sh
 
 </details>
 
+## Usage (Actions)
+[here](https://github.com/whyakari/getProps/actions)
+
 # Credits
 - [0x11DFE](https://github.com/Pixel-Props) by build-prop files
 - [osm0sis](https://github.com/osm0sis) by file gen_pif_custom.sh
