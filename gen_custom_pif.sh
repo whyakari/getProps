@@ -80,9 +80,9 @@ if [ "$UTC" -gt 1521158400 ]; then
 fi;
 
 item "Parsing build first API level ...";
-FIRST_API_LEVEL=$(file_getprop ro.product.first_api_level);
-[ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop vendor-build.prop ro.board.first_api_level);
-[ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop vendor-build.prop ro.board.api_level);
+FIRST_API_LEVEL=$(file_getprop build.prop ro.product.first_api_level);
+[ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.board.first_api_level);
+[ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.board.api_level);
 
 if [ -z "$FIRST_API_LEVEL" ]; then
   [ ! -f build.prop ] && die "No first API level found, add vendor-build.prop";
@@ -108,12 +108,13 @@ if [ -f custom.pif.$FORMAT ]; then
 fi;
 
 item "Writing new custom.pif.$FORMAT ...";
-[ "$FORMAT" == "json" ] && echo '{' | tee -a custom.pif.json;
+[ "$FORMAT" = "json" ] && echo '{' | tee -a custom.pif.json;
+
 for PROP in $LIST; do
   case $FORMAT in
     json) eval echo '\ \ \"$PROP\": \"'\$$PROP'\",';;
     prop) eval echo $PROP=\$$PROP;;
   esac;
 done | sed '$s/,//' | tee -a custom.pif.$FORMAT;
-[ "$FORMAT" == "json" ] && echo '}' | tee -a custom.pif.json;
+[ "$FORMAT" = "json" ] && echo '}' | tee -a custom.pif.json;
 
