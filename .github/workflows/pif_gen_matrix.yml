@@ -1,4 +1,4 @@
-name: Build-Prop Pixel with Cron
+name: Build Pif Matrix
 
 on:
   workflow_dispatch:
