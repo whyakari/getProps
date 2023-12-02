@@ -66,19 +66,27 @@ jobs:
         run: |
           mv build.prop result/
           ls -la result/
+          echo "ls -la ^"
+
           echo ""
-          pwd
+          cat result/build.prop
+          echo "result/build.prop ^"
 
       - name: Create Pif ${{ matrix.device_name }}
         working-directory: ./getProps
         run: |
           ls -la
+          echo "ls -la ^"
+
           echo ""
           ls result/
+          echo "result ^"
+
           echo ""
           pwd
-          echo ""
-          ./gen_custom_pif.sh json ./result/build.prop
+          echo "pwd ^"
+
+          ./gen_custom_pif.sh json result/build.prop
 
       - name: Upload Prop ${{ matrix.device_name }}
         uses: actions/upload-artifact@v3
