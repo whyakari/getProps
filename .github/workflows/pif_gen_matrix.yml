@@ -59,34 +59,18 @@ jobs:
         working-directory: ./getProps
         run: |
           cp ./**/**/{system,module}.prop .
-          cp system.prop build.prop
+          mv system.prop build.prop
 
       - name: Move Build.prop to result
         working-directory: ./getProps
         run: |
-          mv build.prop result/
-          ls -la result/
-          echo "ls -la ^"
-
-          echo ""
-          cat result/build.prop
-          echo "result/build.prop ^"
+          ls
+          # mv build.prop result/
 
       - name: Create Pif ${{ matrix.device_name }}
         working-directory: ./getProps
         run: |
-          ls -la
-          echo "ls -la ^"
-
-          echo ""
-          ls result/
-          echo "result ^"
-
-          echo ""
-          pwd
-          echo "pwd ^"
-
-          ./gen_custom_pif.sh json /home/runner/work/getProps/getProps/getProps/result/build.prop
+          ./gen_custom_pif.sh json build.prop
 
       - name: Upload Prop ${{ matrix.device_name }}
         uses: actions/upload-artifact@v3
