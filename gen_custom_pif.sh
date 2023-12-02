@@ -25,9 +25,6 @@ case $1 in
 esac;
 item "Using format: $FORMAT";
 
-[ ! -f build.prop ] && [ ! -f system-build.prop -o ! -f product-build.prop ] \
-   && die "No build.prop files found in script directory";
-
 item "Parsing build.prop(s) ...";
 
 PRODUCT=$(file_getprop build.prop ro.product.name);
@@ -48,15 +45,15 @@ case $DEVICE in
   generic) die "Generic /system/build.prop values found, rename to system-build.prop and add product-build.prop";;
 esac;
 
-[ -z "$PRODUCT" ] && PRODUCT=$(file_getprop product-build.prop ro.product.product.name);
-[ -z "$DEVICE" ] && DEVICE=$(file_getprop product-build.prop ro.product.product.device);
+[ -z "$PRODUCT" ] && PRODUCT=$(file_getprop build.prop ro.product.product.name);
+[ -z "$DEVICE" ] && DEVICE=$(file_getprop build.prop ro.product.product.device);
 [ -z "$MANUFACTURER" ] && MANUFACTURER=$(file_getprop product-build.prop ro.product.product.manufacturer);
-[ -z "$BRAND" ] && BRAND=$(file_getprop product-build.prop ro.product.product.brand);
-[ -z "$MODEL" ] && MODEL=$(file_getprop product-build.prop ro.product.product.model);
-[ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop product-build.prop ro.product.build.fingerprint);
+[ -z "$BRAND" ] && BRAND=$(file_getprop build.prop ro.product.product.brand);
+[ -z "$MODEL" ] && MODEL=$(file_getprop build.prop ro.product.product.model);
+[ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.product.build.fingerprint);
 
 if [ -z "$FINGERPRINT" ]; then
-  if [ -f build.prop ]; then
+  if [ -f result/build.prop ]; then
     die "No fingerprint found, use a /system/build.prop to start";
   else
     die "No fingerprint found, unable to continue";
@@ -89,10 +86,10 @@ if [ -z "$FIRST_API_LEVEL" ]; then
   item "No first API level found, falling back to build SDK version ...";
   [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.build.version.sdk);
   [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.system.build.version.sdk);
-  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop system-build.prop ro.build.version.sdk);
-  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop system-build.prop ro.system.build.version.sdk);
-  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop vendor-build.prop ro.vendor.build.version.sdk);
-  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop product-build.prop ro.product.build.version.sdk);
+  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.build.version.sdk);
+  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.system.build.version.sdk);
+  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.vendor.build.version.sdk);
+  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.product.build.version.sdk);
 fi;
 echo "$FIRST_API_LEVEL";
 
