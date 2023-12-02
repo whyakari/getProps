@@ -1,4 +1,4 @@
-#!/system/bin/sh
+##!/system/bin/sh
 #
 # To be run with the /system/build.prop (build.prop) and
 # /vendor/build.prop (vendor-build.prop) from the stock
@@ -55,10 +55,12 @@ esac;
 [ -z "$MODEL" ] && MODEL=$(file_getprop build.prop ro.product.product.model);
 [ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.product.build.fingerprint);
 
-if [ -f build.prop ]; then
+if [ -z "$FINGERPRINT" ]; then
+  if [ -f build.prop ]; then
     die "No fingerprint found, use a /system/build.prop to start";
-else
+  else
     die "No fingerprint found, unable to continue";
+  fi;
 fi;
 echo "$FINGERPRINT";
 
