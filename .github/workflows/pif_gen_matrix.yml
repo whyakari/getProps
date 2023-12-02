@@ -64,12 +64,15 @@ jobs:
       - name: Move Build.prop to result
         working-directory: ./getProps
         run: |
+          pwd
           ls
           # mv build.prop result/
 
       - name: Create Pif ${{ matrix.device_name }}
         working-directory: ./getProps
         run: |
+          pwd
+          ls
           ./gen_custom_pif.sh json build.prop
 
       - name: Upload Prop ${{ matrix.device_name }}
