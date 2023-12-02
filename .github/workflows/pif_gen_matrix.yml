@@ -13,25 +13,27 @@ jobs:
         device_name: [sailfish, marlin, sunfish, coral, flame, bramble, redfin, husky, shiba, cheetah, raven]
 
     runs-on: ubuntu-latest
-    container:
-      image: archlinux:latest
-
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Install dos2unix python3 python3-pip
-        working-directory: ./getProps
-        run: |
-          pacman -Syu --noconfirm
-          pacman -Sy sh --noconfirm
-          pacman -Sy --noconfirm dos2unix python python-pip p7zip wget
+      - name: Clone Repo getProps
+        uses: whyakari/github-repo-action@v3.1
+        with:
+          owner: 'whyakari'
+          repository: 'getProps'
 
-      - name: Install protobuf
+      - name: Install dos2unix python3 python3-pip
+        uses: daaku/gh-action-apt-install@v4
+        with:
+          packages: dos2unix python3 python3-pip
+
+      - name: Install protobuf and pyrogram, tgcrypto
         working-directory: ./getProps
         run: |
-          pip install --upgrade pip --break-system-packages
-          pip3 install -Iv protobuf==3.20.3 --break-system-packages
+          pip install --upgrade pip
+          pip install tgcrypto pyrogram
+          pip3 install -Iv protobuf==3.20.3
 
       - name: Make executable all script
         working-directory: ./getProps
