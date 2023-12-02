@@ -4,10 +4,8 @@
 # /vendor/build.prop (vendor-build.prop) from the stock
 # ROM of a device you want to spoof values from
 
-# /*
-# system build.prop to custom.pif.json/.prop creator \
-# by osm0sis @ xda-developers";
-# */
+echo "system build.prop to custom.pif.json/.prop creator \
+    \n  by osm0sis @ xda-developers";
 
 item() { echo "\n- $@"; }
 die() { echo "\n\n! $@"; exit 1; }
@@ -37,14 +35,14 @@ DEVICE=$(file_getprop build.prop ro.product.device);
 MANUFACTURER=$(file_getprop build.prop ro.product.manufacturer);
 BRAND=$(file_getprop build.prop ro.product.brand);
 MODEL=$(file_getprop build.prop ro.product.model);
-FINGERPRINT=$(file_getprop build.prop ro.product.build.fingerprint);
+FINGERPRINT=$(file_getprop build.prop ro.build.fingerprint);
 
 [ -z "$PRODUCT" ] && PRODUCT=$(file_getprop build.prop ro.product.system.name);
 [ -z "$DEVICE" ] && DEVICE=$(file_getprop build.prop ro.product.system.device);
 [ -z "$MANUFACTURER" ] && MANUFACTURER=$(file_getprop build.prop ro.product.system.manufacturer);
 [ -z "$BRAND" ] && BRAND=$(file_getprop build.prop ro.product.system.brand);
 [ -z "$MODEL" ] && MODEL=$(file_getprop build.prop ro.product.system.model);
-[ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.product.build.fingerprint);
+[ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.system.build.fingerprint);
 
 case $DEVICE in
   generic) die "Generic /system/build.prop values found, rename to system-build.prop and add product-build.prop";;
@@ -57,19 +55,26 @@ esac;
 [ -z "$MODEL" ] && MODEL=$(file_getprop build.prop ro.product.product.model);
 [ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.product.build.fingerprint);
 
+if [ -z "$FINGERPRINT" ]; then
+  if [ -f result/build.prop ]; then
+    die "No fingerprint found, use a /system/build.prop to start";
+  else
+    die "No fingerprint found, unable to continue";
+  fi;
+fi;
 echo "$FINGERPRINT";
 
 LIST="PRODUCT DEVICE MANUFACTURER BRAND MODEL FINGERPRINT";
 
 item "Parsing build UTC date ...";
 UTC=$(file_getprop build.prop ro.build.date.utc);
-[ -z "$UTC" ] && UTC=$(file_getprop build.prop ro.build.date.utc);
+[ -z "$UTC" ] && UTC=$(file_getprop system-build.prop ro.build.date.utc);
 date -u -d @$UTC;
 
 if [ "$UTC" -gt 1521158400 ]; then
   item "Build date newer than March 2018, adding SECURITY_PATCH ...";
   SECURITY_PATCH=$(file_getprop build.prop ro.build.version.security_patch);
-  [ -z "$SECURITY_PATCH" ] && SECURITY_PATCH=$(file_getprop build.prop ro.build.version.security_patch);
+  [ -z "$SECURITY_PATCH" ] && SECURITY_PATCH=$(file_getprop system-build.prop ro.build.version.security_patch);
   LIST="$LIST SECURITY_PATCH";
   echo "$SECURITY_PATCH";
 fi;
@@ -79,14 +84,16 @@ FIRST_API_LEVEL=$(file_getprop build.prop ro.product.first_api_level);
 [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.board.first_api_level);
 [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.board.api_level);
 
-
-[ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.build.version.sdk);
-[ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.system.build.version.sdk);
-[ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.build.version.sdk);
-[ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.system.build.version.sdk);
-[ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.vendor.build.version.sdk);
-[ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.product.build.version.sdk);
-
+if [ -z "$FIRST_API_LEVEL" ]; then
+  [ ! -f build.prop ] && die "No first API level found, add vendor-build.prop";
+  item "No first API level found, falling back to build SDK version ...";
+  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.build.version.sdk);
+  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.system.build.version.sdk);
+  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.build.version.sdk);
+  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.system.build.version.sdk);
+  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.vendor.build.version.sdk);
+  [ -z "$FIRST_API_LEVEL" ] && FIRST_API_LEVEL=$(file_getprop build.prop ro.product.build.version.sdk);
+fi;
 echo "$FIRST_API_LEVEL";
 
 if [ "$FIRST_API_LEVEL" -gt 32 ]; then
