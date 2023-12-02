@@ -25,7 +25,7 @@ case $1 in
 esac;
 item "Using format: $FORMAT";
 
-[ ! -f result/build.prop ] \
+[ ! -f build.prop ] \
    && die "No build.prop files found in script directory";
 
 item "Parsing build.prop(s) ...";
@@ -56,7 +56,7 @@ esac;
 [ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.product.build.fingerprint);
 
 if [ -z "$FINGERPRINT" ]; then
-  if [ -f result/build.prop ]; then
+  if [ -f build.prop ]; then
     die "No fingerprint found, use a /system/build.prop to start";
   else
     die "No fingerprint found, unable to continue";
