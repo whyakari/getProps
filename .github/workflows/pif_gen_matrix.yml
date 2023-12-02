@@ -31,7 +31,7 @@ jobs:
         run: chmod +x *.sh
 
       - name: Download last ota ${{ matrix.device_name }}
-        run: ./download_last_ota_build.sh ${{ matrix.device_name }}
+        run: ./last_ota_build.sh ${{ matrix.device_name }}
 
       - name: Extract Image and build prop ${{ matrix.device_name }}
         run: ./extract_images.sh
