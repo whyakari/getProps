@@ -45,7 +45,6 @@ jobs:
 
       - name: Copy prop to result ${{ matrix.device_name }}
         run: |
-          sh --version
           cp ./**/**/{system,module}.prop .
           cp system.prop build.prop
           mv build.prop result/
