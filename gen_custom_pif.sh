@@ -4,8 +4,8 @@
 # /vendor/build.prop (vendor-build.prop) from the stock
 # ROM of a device you want to spoof values from
 
-echo "system build.prop to custom.pif.json/.prop creator \
-    \n  by osm0sis @ xda-developers";
+# system build.prop to custom.pif.json/.prop creator \
+#        by osm0sis @ xda-developers"
 
 item() { echo "\n- $@"; }
 die() { echo "\n\n! $@"; exit 1; }
@@ -55,6 +55,13 @@ esac;
 [ -z "$MODEL" ] && MODEL=$(file_getprop build.prop ro.product.product.model);
 [ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.product.build.fingerprint);
 
+if [ -z "$FINGERPRINT" ]; then
+  if [ -f build.prop ]; then
+    die "No fingerprint found, use a /system/build.prop to start";
+  else
+    die "No fingerprint found, unable to continue";
+  fi;
+fi;
 echo "$FINGERPRINT";
 
 LIST="PRODUCT DEVICE MANUFACTURER BRAND MODEL FINGERPRINT";
