@@ -25,6 +25,9 @@ case $1 in
 esac;
 item "Using format: $FORMAT";
 
+[ ! -f result/build.prop ] \
+   && die "No build.prop files found in script directory";
+
 item "Parsing build.prop(s) ...";
 
 PRODUCT=$(file_getprop build.prop ro.product.name);
