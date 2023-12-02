@@ -55,13 +55,6 @@ esac;
 [ -z "$MODEL" ] && MODEL=$(file_getprop build.prop ro.product.product.model);
 [ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.product.build.fingerprint);
 
-if [ -z "$FINGERPRINT" ]; then
-  if [ -f result/build.prop ]; then
-    die "No fingerprint found, use a /system/build.prop to start";
-  else
-    die "No fingerprint found, unable to continue";
-  fi;
-fi;
 echo "$FINGERPRINT";
 
 LIST="PRODUCT DEVICE MANUFACTURER BRAND MODEL FINGERPRINT";
