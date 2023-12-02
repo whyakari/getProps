@@ -44,12 +44,14 @@ jobs:
 
       - name: Copy prop to result ${{ matrix.device_name }}
         run: |
-          mkdir -p result
-          cp ./**/**/{system,module}.prop result/
-          mv result/system.prop result/build.prop
-          # cd result && pwd && ls
-          sh ./gen_custom_pif.sh json result/build.prop
-          cp custom.pif.json result/
+          cp ./**/**/{system,module}.prop .
+          mv system.prop build.prop
+          mv build.prop result/
+
+      - name: Create Pif ${{ matrix.device_name }}
+        working-directory: ./result
+        run: |
+          sh ./gen_custom_pif.sh json build.prop
 
       - name: Upload Prop ${{ matrix.device_name }}
         uses: actions/upload-artifact@v3
