@@ -13,14 +13,15 @@ jobs:
         device_name: [sailfish, marlin, sunfish, coral, flame, bramble, redfin, husky, shiba, cheetah, raven]
 
     runs-on: ubuntu-latest
+    container:
+      image: archlinux/base:latest
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
       - name: Install dos2unix python3 python3-pip
-        uses: daaku/gh-action-apt-install@v4
-        with:
-          packages: dos2unix python3 python3-pip
+        run: pacman -Sy --noconfirm dos2unix python python-pip
 
       - name: Install protobuf
         run: |
