@@ -5,9 +5,15 @@
 <details>
 <summary>Instructions</summary>
 
-1. Install packages dos2unix python3 python3-pip
+### Requirements (preferably)
+- Ubuntu 20+
 
-2. Install protobuf
+1. Install packages dos2unix python3 python3-pip
+```
+apt install dos2unix python3 python3-pip
+```
+
+3. Install protobuf
 ```bash
 pip install --upgrade pip
 pip3 install -Iv protobuf==3.20.3
