@@ -23,6 +23,7 @@ jobs:
       - name: Install dos2unix python3 python3-pip
         run: |
           pacman -Syu --noconfirm
+          pacman -Sy sh --noconfirm
           pacman -Sy --noconfirm dos2unix python python-pip p7zip wget
 
       - name: Install protobuf
