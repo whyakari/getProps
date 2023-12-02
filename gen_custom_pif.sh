@@ -17,7 +17,7 @@ case $0 in
 esac;
 shdir=$(dirname "$(readlink -f "$shdir")");
 
-# cd $shdir;
+cd $shdir;
 # cd "${GITHUB_WORKSPACE}/result" || die "Failed to change directory to ${GITHUB_WORKSPACE}/result";
 
 
