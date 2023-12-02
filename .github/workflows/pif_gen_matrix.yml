@@ -69,7 +69,7 @@ jobs:
       - name: Create Pif ${{ matrix.device_name }}
         working-directory: ./getProps
         run: |
-          ./gen_custom_pif.sh json result/build.prop
+          ./gen_custom_pif.sh json ./result/build.prop
 
       - name: Upload Prop ${{ matrix.device_name }}
         uses: actions/upload-artifact@v3
