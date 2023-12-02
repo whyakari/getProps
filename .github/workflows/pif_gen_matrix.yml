@@ -65,6 +65,8 @@ jobs:
         working-directory: ./getProps
         run: |
           mv build.prop result/
+          ls -la result/
+          pwd
 
       - name: Create Pif ${{ matrix.device_name }}
         working-directory: ./getProps
