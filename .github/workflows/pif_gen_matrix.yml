@@ -37,7 +37,8 @@ jobs:
 
       - name: Make executable all script
         working-directory: ./getProps
-        run: chmod +x *.sh
+        run: |
+          chmod +x *.sh
 
       - name: Download last ota ${{ matrix.device_name }}
         working-directory: ./getProps
@@ -61,17 +62,9 @@ jobs:
           cp ./**/**/{system,module}.prop .
           mv system.prop build.prop
 
-      - name: Move Build.prop to result
-        working-directory: ./getProps
-        run: |
-          pwd
-          ls
-
       - name: Create Pif ${{ matrix.device_name }}
         working-directory: ./getProps
         run: |
-          pwd
-          ls
           ./gen_custom_pif.sh json /home/runner/work/getProps/getProps/getProps/build.prop
 
       - name: Upload Prop ${{ matrix.device_name }}
