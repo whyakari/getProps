@@ -12,8 +12,7 @@
 ```
 apt install dos2unix python3 python3-pip
 ```
-
-3. Install protobuf
+2. Install protobuf
 ```bash
 pip install --upgrade pip
 pip3 install -Iv protobuf==3.20.3
@@ -22,17 +21,14 @@ pip3 install -Iv protobuf==3.20.3
 ```
 chmod +x *.sh
 ```
-
 4. Download last ota _device_name_, run:
 ```
 ./download_last_ota_build.sh device_name
 ```
-
 5. Extract Image and build.prop, run:
 ```
 ./extract_images.sh
 ```
-
 6. Get your custom_pif.json
 ```
 ./gen_custom_pif.sh json your_build.prop
