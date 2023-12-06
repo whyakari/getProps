@@ -3,7 +3,6 @@
 print_message() {
   default_color="\033[0m"
 
-  # Change the default color based on argument log level
   if [ "$2" = "error" ]; then
     default_color="\033[0;31m"
   elif [ "$2" = "warning" ]; then
@@ -14,7 +13,6 @@ print_message() {
     default_color="\033[0;36m"
   fi
 
-  # Print the message
   echo -e "${default_color}$1\033[0m"
 }
 
@@ -71,7 +69,6 @@ build_prop() {
     return 1
   fi
 
-  # make sure file exist
   if [ ! -f "$2" ]; then
     print_message "File $2 does not exist" error
     return 1
@@ -113,11 +110,7 @@ extract_image() {
     print_message "Extracting \"${1##*/}/$2.img\"" debug
 
     7z x "$1/$2.img" -o"$1/extracted/$2" -y &>/dev/null
-    # ImjTool not required since of A13?
-    # ./imjtool "$1/$2.img" extract &>/dev/null
-    # rm -rf extracted
   fi
 }
 
-# Using requirements.sh
 [ -f "requirements.sh" ] && . ./requirements.sh || { echo "requirements.sh not found" && exit 1; }
