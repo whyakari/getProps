@@ -28,19 +28,20 @@ done
 
 echo "Extração concluída. Arquivos movidos para: $extracted_dir"
 
-rm extracted_images/apex_info
-rm extracted_images/care_map
-
 # Extrair/Dump
 for file in "$extracted_dir"/*; do
     if [ -f "$file" ] && [ "${file: -4}" == ".bin" ]; then
         filename="${file##*/}"
         basename="${filename%.*}"
 
-        # Verificar se o arquivo já existe antes de extrair/dumpar
         if [ ! -f "extracted_images/$basename" ]; then
             print_message "Dumping \"$basename\"..." debug
-            python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
+
+            if [ ! -f "$file/apex_info" ] && [ ! -f "$file/care_map" ]; then
+                python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
+            else
+                print_message "Ignorando \"$basename\" devido à presença de apex_info ou care_map." debug
+            fi
         else
             print_message "O arquivo \"$basename\" já existe. Pulando a extração/dump." debug
         fi
