@@ -71,5 +71,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.read_name.outputs.final_name }}
-          path: /home/runner/work/getProps/getProps/getProps/custom.pif.json
+          path: /home/runner/work/getProps/getProps/getProps/pif.json
           if-no-files-found: error
