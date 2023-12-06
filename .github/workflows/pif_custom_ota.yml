@@ -1,0 +1,71 @@
+name: Build Prop Pixel Google
+
+on:
+  workflow_dispatch:
+    inputs:
+      device_name:
+        description: "Device Name"
+        required: true
+        default: "cheetah"
+        type: choice
+        
+        options:
+          - zenfone-8-flip
+
+jobs:
+  onDispatch:
+    name: On Dispatch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Clone Repo getProps
+        uses: whyakari/github-repo-action@v3.1
+        with:
+          branch: 'main'
+          owner: 'whyakari'
+          repository: 'getProps'
+
+      - name: Install dos2unix python3 python3-pip
+        uses: daaku/gh-action-apt-install@v4
+        with:
+          packages: dos2unix python3 python3-pip
+
+      - name: Install protobuf
+        working-directory: ./getProps
+        run: |
+          pip install --upgrade pip
+          pip3 install -Iv protobuf==3.20.3
+
+      - name: Make executable all script
+        working-directory: ./getProps
+        run: chmod +x *.sh
+
+      - name: Download last ota ${{ github.event.inputs.device_name }}
+        working-directory: ./getProps
+        run: python3 custom_ota_download.py ${{ github.event.inputs.device_name }}
+
+      - name: Extract Image and build prop
+        working-directory: ./getProps
+        run: ./extract_images.sh
+
+      - name: Copy prop to result ${{ matrix.device_name }}
+        working-directory: ./getProps
+        run: |
+          cp ./**/**/{system,module}.prop .
+          mv system.prop build.prop
+
+      - name: Create Pif Json 
+        working-directory: ./getProps
+        run: |
+          sh ./gen_custom_pif.sh json build.prop 
+          rm build.prop 
+          echo "artifactPath=/home/runner/work/getProps/getProps/getProps/custom.pif.json" >> $GITHUB_ENV
+
+      - name: Upload Pif ${{ matrix.device_name }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact-pif
+          path: ${{ env.artifactPath }}
+          if-no-files-found: error
