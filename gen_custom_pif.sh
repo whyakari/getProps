@@ -108,7 +108,7 @@ if [ -f custom.pif.$FORMAT ]; then
 fi;
 
 item "Writing new custom.pif.$FORMAT ...";
-[ "$FORMAT" == "json" ] && echo '{' | tee -a custom.pif.json;
+[ "$FORMAT" = "json" ] && echo '{' | tee -a custom.pif.json;
 
 for PROP in $LIST; do
   case $FORMAT in
@@ -116,5 +116,5 @@ for PROP in $LIST; do
     prop) eval echo $PROP=\$$PROP;;
   esac;
 done | sed '$s/,//' | tee -a custom.pif.$FORMAT;
-[ "$FORMAT" == "json" ] && echo '}' | tee -a custom.pif.json;
+[ "$FORMAT" = "json" ] && echo '}' | tee -a custom.pif.json;
 
