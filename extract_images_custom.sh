@@ -1,7 +1,9 @@
 #!/bin/bash
 
+# Using util_functions.sh
 [ -f "util_functions.sh" ] && . ./util_functions.sh || { echo "util_functions.sh not found" && exit 1; }
 
+# Extract payload as OTA or system image if factory
 print_message "Extracting images from archives..." info
 for file in ./*; do
     if [ -f "$file" ]; then
@@ -11,20 +13,25 @@ for file in ./*; do
             devicename="${basename%%-*}"
             print_message "Processing \"$filename\"" debug
 
+            # Time the extraction
             extraction_start=$(date +%s)
 
-            if [[ ! "${basename##"$devicename"-ota-*}" ]]; then
-                7z e "$file" -o "extracted_archive_images" "payload.bin" -r &>/dev/null
+            # Extract images
+            if unzip -l "$file" | grep -q "payload.bin"; then
+                7z e "$file" -o"extracted_archive_images" "payload.bin" -r &>/dev/null
                 mv -f "extracted_archive_images/payload.bin" "extracted_archive_images/$basename.bin"
             else
-                7z e "$file" -o "extracted_archive_images" "*/*.zip" -r -y &>/dev/null
+                7z e "$file" -o"extracted_archive_images" "*/*.zip" -r -y &>/dev/null
             fi
 
+            # Remove the archive
             rm "$file"
 
+            # Time the extraction
             extraction_end=$(date +%s)
             extraction_runtime=$((extraction_end - extraction_start))
 
+            # Print the time
             print_message "Extraction time: $extraction_runtime seconds" debug
         fi
     fi
@@ -40,9 +47,11 @@ if [ -d "extracted_archive_images" ]; then
                 basename="${filename%.*}"
                 print_message "Processing \"$filename\"" debug
 
+                # Time the extraction
                 extraction_start=$(date +%s)
 
-                if [ "${file: -4}" == ".bin" ]; then
+                # Extract/Dump
+                if unzip -l "$file" | grep -q "payload.bin"; then
                     python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
                 else
                     for image_name in "${IMAGES2EXTRACT[@]}"; do
@@ -51,9 +60,11 @@ if [ -d "extracted_archive_images" ]; then
                     done
                 fi
 
+                # Time the extraction
                 extraction_end=$(date +%s)
                 extraction_runtime=$((extraction_end - extraction_start))
 
+                # Print the time
                 print_message "Extraction time: $extraction_runtime seconds" debug
             fi
         fi
@@ -62,24 +73,30 @@ if [ -d "extracted_archive_images" ]; then
     rm -rf "extracted_archive_images"
 fi
 
+# Extract the images directories
 print_message "\nExtracting images and directories..." info
 for dir in ./extracted_images/*; do
     if [ -d "$dir" ]; then
         dir=${dir%*/}
         print_message "Processing \"${dir##*/}\"" debug
 
+        # Time the extraction
         extraction_start=$(date +%s)
 
+        # Extract all and clean
         for image_name in "${IMAGES2EXTRACT[@]}"; do
             extract_image "$dir" "$image_name"
             rm "$dir/$image_name.img"
         done
 
+        # Time the extraction
         extraction_end=$(date +%s)
         extraction_runtime=$((extraction_end - extraction_start))
 
+        # Print the extraction time
         print_message "Extraction time: $extraction_runtime seconds" debug
 
+        # Build system.prop
         print_message "Building props..." info
         ./build_props.sh "$dir"
     fi
