@@ -2,7 +2,7 @@
 > get your pif custom! (google pixel images)
 
 ### About about other custom images
-- zenfone images still in beta and don't work (yet)
+- now we have zenfone images and pixel images
 - other images will be added soon.
 
 ## Usage (Local)
