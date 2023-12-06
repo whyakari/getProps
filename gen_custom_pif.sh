@@ -32,7 +32,7 @@ item "Parsing build.prop(s) ...";
 
 PRODUCT=$(file_getprop build.prop ro.product.name);
 DEVICE=$(file_getprop build.prop ro.product.device);
-MANUFACTURER=$(file_getprop build.prop ro.product.manufacturer);
+MANUFACTURER=$(file_getprop build.prop ro.product.system_ext.manufacturer);
 BRAND=$(file_getprop build.prop ro.product.brand);
 MODEL=$(file_getprop build.prop ro.product.model);
 FINGERPRINT=$(file_getprop build.prop ro.build.fingerprint);
@@ -41,7 +41,7 @@ VNDK_VERSION=$(file_getprop build.prop ro.product.vndk.version);
 
 [ -z "$PRODUCT" ] && PRODUCT=$(file_getprop build.prop ro.product.system.name);
 [ -z "$DEVICE" ] && DEVICE=$(file_getprop build.prop ro.product.system.device);
-[ -z "$MANUFACTURER" ] && MANUFACTURER=$(file_getprop build.prop ro.product.system.manufacturer);
+[ -z "$MANUFACTURER" ] && MANUFACTURER=$(file_getprop build.prop ro.product.system_ext.manufacturer);
 [ -z "$BRAND" ] && BRAND=$(file_getprop build.prop ro.product.system.brand);
 [ -z "$MODEL" ] && MODEL=$(file_getprop build.prop ro.product.system.model);
 [ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.system.build.fingerprint);
@@ -58,6 +58,8 @@ esac;
 [ -z "$BRAND" ] && BRAND=$(file_getprop build.prop ro.product.product.brand);
 [ -z "$MODEL" ] && MODEL=$(file_getprop build.prop ro.product.product.model);
 [ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.product.build.fingerprint);
+[ -z "$BUILD_ID" ] && BUILD_ID=$(file_getprop build.prop ro.product.build.id);
+[ -z "$VNDK_VERSION" ] && VNDK_VERSION=$(file_getprop build.prop ro.product.vndk.version);
 
 if [ -z "$FINGERPRINT" ]; then
   if [ -f build.prop ]; then
@@ -72,13 +74,13 @@ LIST="PRODUCT DEVICE MANUFACTURER BRAND MODEL FINGERPRINT";
 
 item "Parsing build UTC date ...";
 UTC=$(file_getprop build.prop ro.build.date.utc);
-[ -z "$UTC" ] && UTC=$(file_getprop system-build.prop ro.build.date.utc);
+[ -z "$UTC" ] && UTC=$(file_getprop build.prop ro.build.date.utc);
 date -u -d @$UTC;
 
 if [ "$UTC" -gt 1521158400 ]; then
   item "Build date newer than March 2018, adding SECURITY_PATCH ...";
   SECURITY_PATCH=$(file_getprop build.prop ro.build.version.security_patch);
-  [ -z "$SECURITY_PATCH" ] && SECURITY_PATCH=$(file_getprop system-build.prop ro.build.version.security_patch);
+  [ -z "$SECURITY_PATCH" ] && SECURITY_PATCH=$(file_getprop build.prop ro.build.version.security_patch);
   LIST="$LIST SECURITY_PATCH";
   echo "$SECURITY_PATCH";
 fi;
