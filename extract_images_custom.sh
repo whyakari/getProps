@@ -36,7 +36,9 @@ for file in "$extracted_dir"/*; do
         basename="${filename%.*}"
 
         if [ ! -f "extracted_images/$basename" ]; then
-			rm -f "extracted_images/$basename/payload" "extracted_images/$basename/apex_info" "extracted_images/$basename/care_map" "extracted_images/$basename/payload_properties"
+
+			find "extracted_images/$basename" -type f \( -name "apex_info" -o -name "care_map" -o -name "payload_properties" -c -name "payload" \) -exec rm -f {} +
+
             print_message "Dumping \"$basename\"..." debug
             python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
         else
