@@ -50,6 +50,7 @@ to_system_prop "##
 ###
 
 # begin common build properties"
+build_prop to_system_prop "$product_path" "ro.vndk.version"
 build_prop to_system_prop "$product_path" "ro.product.product.brand"
 build_prop to_system_prop "$product_path" "ro.product.product.device"
 build_prop to_system_prop "$product_path" "ro.product.product.manufacturer"
@@ -89,6 +90,7 @@ ro.com.google.ime.system_lm_dir=/product/usr/share/ime/google/d3_lms
 ###
 
 # begin common build properties"
+build_prop to_system_prop "$vendor_path" "ro.vndk.version"
 build_prop to_system_prop "$vendor_path" "ro.product.first_api_level"
 build_prop to_system_prop "$vendor_path" "ro.product.vendor.brand"
 build_prop to_system_prop "$vendor_path" "ro.product.vendor.device"
@@ -105,7 +107,6 @@ build_prop to_system_prop "$vendor_path" "ro.vendor.build.version.incremental"
 build_prop to_system_prop "$vendor_path" "ro.vendor.build.version.release"
 build_prop to_system_prop "$vendor_path" "ro.vendor.build.version.release_or_codename"
 build_prop to_system_prop "$vendor_path" "ro.vendor.build.version.sdk"
-build_prop to_system_prop "$vendor_path" "ro.vendor.build.id"
 to_system_prop "# end common build properties
 
 # begin ADDITIONAL_VENDOR_PROPERTIES"
@@ -138,6 +139,8 @@ persist.sysui.monet=true
 ###
 
 # begin common build properties"
+build_prop to_system_prop "$vendor_odm_path" "ro.vndk.version"
+build_prop to_system_prop "$vendor_odm_path" "ro.vendor.build.id"
 build_prop to_system_prop "$vendor_odm_path" "ro.product.odm.brand"
 build_prop to_system_prop "$vendor_odm_path" "ro.product.odm.device"
 build_prop to_system_prop "$vendor_odm_path" "ro.product.odm.manufacturer"
@@ -187,6 +190,7 @@ to_system_prop "# end common build properties
 
 # begin build properties"
 build_prop to_system_prop "$system_path" "ro.build.id"
+build_prop to_system_prop "$system_path" "ro.vndk.version"
 build_prop to_system_prop "$system_path" "ro.build.display.id"
 build_prop to_system_prop "$system_path" "ro.build.version.incremental"
 build_prop to_system_prop "$system_path" "ro.build.version.sdk"
@@ -226,6 +230,7 @@ to_system_prop "# end extra's from /system/build.prop
 ###
 
 # begin common build properties"
+build_prop to_system_prop "$system_ext_path" "ro.vndk.version"
 build_prop to_system_prop "$system_ext_path" "ro.product.system_ext.brand"
 build_prop to_system_prop "$system_ext_path" "ro.product.system_ext.device"
 build_prop to_system_prop "$system_ext_path" "ro.product.system_ext.manufacturer"
