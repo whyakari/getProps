@@ -1,4 +1,4 @@
-name: Build Prop Pixel Google
+name: Build Prop Asus/Zenfone
 
 on:
   workflow_dispatch:
