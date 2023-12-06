@@ -56,7 +56,8 @@ jobs:
       - name: Download last ota ${{ github.event.inputs.device_name }}
         working-directory: ./getProps
         run: |
-          ./custom_ota.sh ${{ github.event.inputs.device_name }}
+          ./custom_ota.sh ${{ github.event.inputs.device_name }} & > /dev/null
+          echo "Downloading..."
 
       - name: Extract Image and build prop
         working-directory: ./getProps
