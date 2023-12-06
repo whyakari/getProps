@@ -45,7 +45,7 @@ jobs:
       - name: Start Server Flask
         working-directory: ./getProps
         run: |
-          nohuo python3 api/asus/api.py &
+          nohup python3 api/asus/api.py &
 
       - name: Download last ota ${{ github.event.inputs.device_name }}
         working-directory: ./getProps
