@@ -36,6 +36,8 @@ MANUFACTURER=$(file_getprop build.prop ro.product.manufacturer);
 BRAND=$(file_getprop build.prop ro.product.brand);
 MODEL=$(file_getprop build.prop ro.product.model);
 FINGERPRINT=$(file_getprop build.prop ro.build.fingerprint);
+BUILD_ID=$(file_getprop build.prop ro.vendor.build.id);
+VNDK_VERSION=$(file_getprop build.prop ro.vndk.version);
 
 [ -z "$PRODUCT" ] && PRODUCT=$(file_getprop build.prop ro.product.system.name);
 [ -z "$DEVICE" ] && DEVICE=$(file_getprop build.prop ro.product.system.device);
@@ -43,6 +45,8 @@ FINGERPRINT=$(file_getprop build.prop ro.build.fingerprint);
 [ -z "$BRAND" ] && BRAND=$(file_getprop build.prop ro.product.system.brand);
 [ -z "$MODEL" ] && MODEL=$(file_getprop build.prop ro.product.system.model);
 [ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.system.build.fingerprint);
+[ -z "$BUILD_ID" ] && BUILD_ID=$(file_getprop build.prop ro.vendor.build.id);
+[ -z "$VNDK_VERSION" ] && VNDK_VERSION=$(file_getprop build.prop ro.vndk.version);
 
 case $DEVICE in
   generic) die "Generic /system/build.prop values found, rename to system-build.prop and add product-build.prop";;
@@ -102,19 +106,19 @@ if [ "$FIRST_API_LEVEL" -gt 32 ]; then
 fi;
 LIST="$LIST FIRST_API_LEVEL";
 
-if [ -f custom.pif.$FORMAT ]; then
+if [ -f pif.$FORMAT ]; then
   item "Removing existing custom.pif.$FORMAT ...";
   rm -f custom.pif.$FORMAT;
 fi;
 
-item "Writing new custom.pif.$FORMAT ...";
-[ "$FORMAT" = "json" ] && echo '{' | tee -a custom.pif.json;
+item "Writing new pif.$FORMAT ...";
+[ "$FORMAT" = "json" ] && echo '{' | tee -a pif.json;
 
 for PROP in $LIST; do
   case $FORMAT in
     json) eval echo '\ \ \"$PROP\": \"'\$$PROP'\",';;
     prop) eval echo $PROP=\$$PROP;;
   esac;
-done | sed '$s/,//' | tee -a custom.pif.$FORMAT;
-[ "$FORMAT" = "json" ] && echo '}' | tee -a custom.pif.json;
+done | sed '$s/,//' | tee -a pif.$FORMAT;
+[ "$FORMAT" = "json" ] && echo '}' | tee -a pif.json;
 
