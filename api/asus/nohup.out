@@ -1,0 +1,123 @@
+ * Serving Flask app 'api'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with watchdog (inotify)
+ * Debugger is active!
+ * Debugger PIN: 141-205-007
+127.0.0.1 - - [05/Dec/2023 21:25:40] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:26:20] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:26:39] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:26:42] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:27:11] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:27:25] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:27:32] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:28:57] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:32:09] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:33:30] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:37:05] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:37:36] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:37:54] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:38:15] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:38:20] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:38:35] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:40:17] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:40:51] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:41:22] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:52:19] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:52:28] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [05/Dec/2023 21:53:18] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 21:54:44] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [05/Dec/2023 21:57:03] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 22:05:57] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 22:08:10] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 22:10:52] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 22:13:54] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 22:17:41] "GET /v1/asus/zenfone HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2023 22:25:03] "GET /favicon.ico HTTP/1.1" 404 -
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/field_mask_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/json_format.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/api_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/descriptor_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/message.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/__init__.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/message_factory.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/descriptor_database.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/descriptor.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/descriptor_pool.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/duration_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/empty_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/any_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/proto_builder.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/proto_builder.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/proto_builder.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/reflection.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/reflection.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/reflection.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/service.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/service.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/service.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/service_reflection.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/service_reflection.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/service_reflection.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/source_context_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/source_context_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/source_context_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/struct_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/struct_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/struct_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/symbol_database.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/symbol_database.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/symbol_database.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/text_encoding.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/text_encoding.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/text_encoding.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/text_format.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/text_format.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/text_format.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/timestamp_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/timestamp_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/timestamp_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/type_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/type_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/type_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/wrappers_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/wrappers_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/wrappers_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/compiler/plugin_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/compiler/__init__.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/python_message.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/message_listener.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/well_known_types.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/wire_format.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/__init__.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/encoder.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/api_implementation.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/type_checkers.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/enum_type_wrapper.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/builder.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/containers.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/extension_dict.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/internal/decoder.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/pyext/__init__.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/pyext/cpp_message.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/util/json_format_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/util/json_format_proto3_pb2.py', reloading
+ * Detected change in '/root/.pyenv/versions/3.12.0/lib/python3.12/site-packages/google/protobuf/util/__init__.py', reloading
+ * Restarting with watchdog (inotify)
+ * Debugger is active!
+ * Debugger PIN: 141-205-007
+Traceback (most recent call last):
+  File "/root/src/github.com/whyakari/getProps/api/asus/api.py", line 1, in <module>
+    from flask import Flask, json, jsonify
+ModuleNotFoundError: No module named 'flask'
+ * Serving Flask app 'api'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 139-434-324
+127.0.0.1 - - [06/Dec/2023 01:20:55] "GET /v1/asus/zenfone HTTP/1.1" 200 -

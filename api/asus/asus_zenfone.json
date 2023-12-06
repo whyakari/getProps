@@ -1,0 +1,44 @@
+{
+	"zenfone": {
+		"zenfone-5": {
+			"model": "ZE620KL",
+            "download_url": "UL-ASUS_X00QD-ASUS-16.0615.2006.131-1.1.41-user.zip"
+        },
+        "zenfone-5z": {
+            "model": "ZS620KL",
+            "download_url": "UL-Z01R-WW-100.10.107.123-user.zip"
+        },
+        "zenfone-6": {
+            "model": "ZS630KL",
+            "download_url": "UL-ASUS_I01WD-ASUS-18.0610.2106.156-1.1.1-user.zip"
+        },
+        "zenfone-6-edition-30": {
+            "model": "ZS630KL",
+            "download_url": "UL-ASUS_I01WD-ASUS-18.0610.2106.156-1.1.1-user.zip"
+        },
+        "zenfone-7": {
+            "model": "ZS670KS",
+            "download_url": "UL-I002D-ASUS-31.0210.0210.324-1.1.1-2305-user.zip"
+        },
+        "zenfone-7-pro": {
+            "model": "ZS670KS",
+            "download_url": "UL-I002D-ASUS-31.0210.0210.324-1.1.1-2305-user.zip"
+        },
+        "zenfone-8": {
+            "model": "ZS590KS",
+            "download_url": "UL-ASUS_I006D-ASUS-33.0210.0210.296-1.1.26-2305-user.zip"
+        },
+        "zenfone-8-flip": {
+            "model": "ZS672KS",
+            "download_url": "UL-ASUS_I004D-ASUS-33.0210.0210.296-1.1.10-2305-user.zip"
+        },
+        "zenfone-9": {
+            "model": "AI2202",
+            "download_url": "UL-ASUS_AI2202-ASUS-33.0804.2060.142-1.1.1-2306-user.zip"
+        },
+        "zenfone-10": {
+            "model": "AI2302",
+            "download_url": "UL-ASUS_AI2302-ASUS-33.0220.0220.52-1.1.4-2308-user.zip"
+        }
+    }
+}
