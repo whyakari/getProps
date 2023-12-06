@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[ -f "util_functions.sh" ] && . ./util_functions.sh || { echo "util_functions.sh not found" && exit 1; }
+
 zip_file=$(find . -maxdepth 1 -type f -name "*.zip" -print -quit)
 
 if [ -z "$zip_file" ]; then
