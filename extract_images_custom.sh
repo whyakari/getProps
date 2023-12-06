@@ -22,7 +22,7 @@ for file in "$extracted_dir"/*; do
 
         if [ "$basename" != "payload" ]; then
             mv -f "$file" "$extracted_dir/$basename.bin"
-            rm -f "$extracted_dir/payload" "$extracted_dir/apex_info" "$extracted_dir/care_map" "$extracted_dir/payload_properties"
+
         fi
     fi
 done
@@ -36,6 +36,7 @@ for file in "$extracted_dir"/*; do
         basename="${filename%.*}"
 
         if [ ! -f "extracted_images/$basename" ]; then
+			rm -f "extracted_images/$basename/payload" "extracted_images/$basename/apex_info" "extracted_images/$basename/care_map" "extracted_images/$basename/payload_properties"
             print_message "Dumping \"$basename\"..." debug
             python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
         else
