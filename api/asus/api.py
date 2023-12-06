@@ -13,8 +13,8 @@ def get_v1():
     return jsonify(message)
 
 @app.route('/v1/asus/zenfone')
-def get_langs():
-    with open('asus_zenfone.json', 'r', encoding='utf-8') as file:
+def get_devices():
+    with open('api/asus/asus_zenfone.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
     return jsonify(data)
 
