@@ -105,10 +105,13 @@ build_prop to_system_prop "$vendor_path" "ro.vendor.build.version.incremental"
 build_prop to_system_prop "$vendor_path" "ro.vendor.build.version.release"
 build_prop to_system_prop "$vendor_path" "ro.vendor.build.version.release_or_codename"
 build_prop to_system_prop "$vendor_path" "ro.vendor.build.version.sdk"
+build_prop to_system_prop "$vendor_path" "ro.vendor.build.id"
 to_system_prop "# end common build properties
 
 # begin ADDITIONAL_VENDOR_PROPERTIES"
 build_prop to_system_prop "$vendor_path" "ro.vendor.build.security_patch"
+build_prop to_system_prop "$vendor_path" "ro.vndk.version"
+build_prop to_system_prop "$vendor_path" "ro.product.first_api_level"
 to_system_prop "# end ADDITIONAL_VENDOR_PROPERTIES
 
 # begin BOOTIMAGE_build_prop to_system_propERTIES"
