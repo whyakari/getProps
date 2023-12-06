@@ -10,7 +10,16 @@ on:
         type: choice
         
         options:
+          - zenfone-5
+          - zenfone-5z
+          - zenfone-6
+          - zenfone-6-edition-30
+          - zenfone-7
+          - zenfone-7-pro
+          - zenfone-8
           - zenfone-8-flip
+          - zenfone-9
+          - zenfone-10
 
 jobs:
   onDispatch:
