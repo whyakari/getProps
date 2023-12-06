@@ -12,9 +12,9 @@ fi
 extracted_dir="extracted_images"
 
 mkdir -p "$extracted_dir"
-
 unzip -o "$zip_file" -d "$extracted_dir" &>/dev/null
 
+# Extract
 for file in "$extracted_dir"/*; do
     if [ -f "$file" ]; then
         filename="${file##*/}"
@@ -22,21 +22,20 @@ for file in "$extracted_dir"/*; do
 
         if [ "$basename" != "payload" ]; then
             mv -f "$file" "$extracted_dir/$basename.bin"
+            rm -f "$extracted_dir/payload" "$extracted_dir/apex_info" "$extracted_dir/care_map" "$extracted_dir/payload_properties"
         fi
     fi
 done
 
 echo "Extração concluída. Arquivos movidos para: $extracted_dir"
 
-# Extrair/Dump
+# Dumping
 for file in "$extracted_dir"/*; do
     if [ -f "$file" ] && [ "${file: -4}" == ".bin" ]; then
         filename="${file##*/}"
         basename="${filename%.*}"
 
         if [ ! -f "extracted_images/$basename" ]; then
-            rm -f "$file/apex_info" "$file/care_map" "$file/payload_properties"
-
             print_message "Dumping \"$basename\"..." debug
             python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
         else
