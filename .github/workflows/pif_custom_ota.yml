@@ -48,6 +48,11 @@ jobs:
           pip3 install -r api/asus/requirements.txt
           nohup python3 api/asus/api.py &
 
+      - name: Server Test Flask
+        working-directory: ./getProps
+        run: |
+          curl http://127.0.0.1:5000/v1/asus/zenfone
+
       - name: Download last ota ${{ github.event.inputs.device_name }}
         working-directory: ./getProps
         run: |
