@@ -35,15 +35,13 @@ for file in "$extracted_dir"/*; do
         basename="${filename%.*}"
 
         if [ ! -f "extracted_images/$basename" ]; then
-            print_message "Dumping \"$basename\"..." debug
+            rm -f "$file/apex_info" "$file/care_map" "$file/payload_properties"
 
-            if [ ! -f "$file/apex_info" ] && [ ! -f "$file/care_map" ]; then
-                python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
-            else
-                print_message "Ignorando \"$basename\" devido à presença de apex_info ou care_map." debug
-            fi
+            print_message "Dumping \"$basename\"..." debug
+            python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
         else
             print_message "O arquivo \"$basename\" já existe. Pulando a extração/dump." debug
         fi
     fi
 done
+
