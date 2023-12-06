@@ -3,23 +3,19 @@
 [ -f "util_functions.sh" ] && . ./util_functions.sh || { echo "util_functions.sh not found" && exit 1; }
 
 if [ -z "$1" ]; then
-  echo "No ota device name provided to be downloaded" >&2
+  print_message "No ota device name provided to be downloaded" error
   exit 1
 fi
 
-args="$1"
-name=$(curl -s "http://127.0.0.1:5000/v1/asus/zenfone" | jq -r ".$args")
+for device_name in "${@}"; do
+  print_message "Downloading ($device_name)..." debug
 
-model=$(echo "$name" | jq -r '.model')
-download_url=$(echo "$name" | jq -r '.download_url')
+  python3 custom_ota_download.py "$device_name"
+  
+  print_message "Downloading OTA for \"$device_name\"..." debug
+  python3 custom_ota_download.py "$device_name"
 
-echo "$model"
-echo "$download_url"
+  print_message "Done downloading for \"$device_name\"" debug
+done
 
-function download_device() {
-    file="https://dlcdnets.asus.com/pub/ASUS/ZenFone/$1/$2"
-    wget "$file"
-}
-
-download_device "$model" "$download_url"
-
+print_message "Done. You can now extract/dump the image." info
