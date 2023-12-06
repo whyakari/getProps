@@ -62,6 +62,7 @@ jobs:
         working-directory: ./getProps
         run: |
           ./extract_images_custom.sh
+          ls extracted_images/
 
       - name: Copy prop to result ${{ matrix.device_name }}
         working-directory: ./getProps
