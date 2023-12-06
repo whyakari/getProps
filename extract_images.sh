@@ -17,7 +17,7 @@ for file in ./*; do                    # List directory ./*
 			extraction_start=$(date +%s)
 
 			# Extract images
-			if [[ ! "${basename##"$devicename"-ota-*}" ]]; then # Presume if the image is OTA or Factory based on devicename
+			if [[ ! "${basename}" ]]; then
 				7z e "$file" -o"extracted_archive_images" "payload.bin" -r &>/dev/null
 				mv -f "extracted_archive_images/payload.bin" "extracted_archive_images/$basename.bin"
 			else # else assume it is factory and extract everything
