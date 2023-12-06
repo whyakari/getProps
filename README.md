@@ -1,5 +1,9 @@
 # GetProps 
-> get your pif custom! (google pixel images and asus zenfone firmware)
+> get your pif custom! (google pixel images)
+
+### About about other custom images
+- zenfone images still in beta and don't work (yet)
+- other images will be added soon.
 
 ## Usage (Local)
 <details>
