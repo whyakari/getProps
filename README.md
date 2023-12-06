@@ -1,12 +1,12 @@
 # GetProps 
-> get pif from Google Pixel images!
+> get your pif custom! (google pixel images and asus zenfone firmware)
 
 ## Usage (Local)
 <details>
 <summary>Instructions</summary>
 
 ### Requirements (preferably)
-- Ubuntu 20+
+- Linux
 
 1. Install packages dos2unix python3 python3-pip
 ```
