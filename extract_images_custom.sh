@@ -28,6 +28,9 @@ done
 
 echo "Extração concluída. Arquivos movidos para: $extracted_dir"
 
+rm extracted_images/apex_info
+rm extracted_images/care_map
+
 # Extrair/Dump
 for file in "$extracted_dir"/*; do
     if [ -f "$file" ] && [ "${file: -4}" == ".bin" ]; then
