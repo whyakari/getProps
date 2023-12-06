@@ -26,3 +26,18 @@ done
 
 echo "Extração concluída. Arquivos movidos para: $extracted_dir"
 
+# Extrair/Dump
+for file in "$extracted_dir"/*; do
+    if [ -f "$file" ] && [ "${file: -4}" == ".bin" ]; then
+        filename="${file##*/}"
+        basename="${filename%.*}"
+
+        # Verificar se o arquivo já existe antes de extrair/dumpar
+        if [ ! -f "extracted_images/$basename" ]; then
+            print_message "Dumping \"$basename\"..." debug
+            python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
+        else
+            print_message "O arquivo \"$basename\" já existe. Pulando a extração/dump." debug
+        fi
+    fi
+done
