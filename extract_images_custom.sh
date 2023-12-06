@@ -1,72 +1,104 @@
+extract_images.sh
 #!/bin/bash
 
+# Using util_functions.sh
 [ -f "util_functions.sh" ] && . ./util_functions.sh || { echo "util_functions.sh not found" && exit 1; }
 
-zip_file=$(find . -maxdepth 1 -type f -name "*.zip" -print -quit)
-
-if [ -z "$zip_file" ]; then
-    echo "Nenhum arquivo .zip encontrado no diretório atual."
-    exit 1
-fi
-
-extracted_dir="extracted_images"
-
-mkdir -p "$extracted_dir"
-unzip -o "$zip_file" -d "$extracted_dir" &>/dev/null
-
-# Extract
+# Extract payload as ota or system image if factory
 print_message "Extracting images from archives..." info
-for file in "$extracted_dir"/*; do
-    if [ -f "$file" ]; then
-        filename="${file##*/}"
-        basename="${filename%.*}"
+for file in ./*; do                    # List directory ./*
+        if [ -f "$file" ]; then               # Check if it is a file
+                if [ "${file: -4}" == ".zip" ]; then # Check if it is a zip file
+                        filename="${file##*/}"              # Remove the path
+                        basename="${filename%.*}"           # Remove the extension
+                        devicename="${basename%%-*}"        # Remove the extension
+                        print_message "Processing \"$filename\"" debug
 
-        if [ "$basename" != "payload" ]; then
-            mv -f "$file" "$extracted_dir/$basename.bin"
-		else
-			7z e "$file" -o "extracted_archive_images" "*/*.zip" -r -y &>/dev/null
-		fi
-    fi
+                        # Time the extraction
+                        extraction_start=$(date +%s)
+
+                        # Extract images
+                        if [[ ! "${basename}" ]]; then # Presume if the image is OTA or Factory based on devicename
+                                7z e "$file" -o"extracted_archive_images" "payload.bin" -r &>/dev/null
+                                mv -f "extracted_archive_images/payload.bin" "extracted_archive_images/$basename.bin"
+                        else # else assume it is factory and extract everything
+                                7z e "$file" -o"extracted_archive_images" "*/*.zip" -r -y &>/dev/null
+                        fi
+
+                        # We dont need the archive anymore
+                        rm "$file"
+
+                        # Time the extraction
+                        extraction_end=$(date +%s)
+                        extraction_runtime=$((extraction_end - extraction_start))
+
+                        # Print the time
+                        print_message "Extraction time: $extraction_runtime seconds" debug
+                fi
+        fi
 done
 
-# Dumping
-for file in "$extracted_dir"/*; do
-    if [ -f "$file" ] && [ "${file: -4}" == ".bin" ]; then
-		print_message "\nExtracting/Dumping images from \"extracted_archive_images\"..." info
+if [ -d "extracted_archive_images" ]; then
+        print_message "\nExtracting/Dumping images from \"extracted_archive_images\"..." info
 
-        filename="${file##*/}"
-        basename="${filename%.*}"
+        for file in ./extracted_archive_images/*; do                          # List directory ./extracted_archive_images/*
+                if [ -f "$file" ]; then                                              # Check if it is a file
+                        if [ "${file: -4}" == ".zip" ] || [ "${file: -4}" == ".bin" ]; then # Check if it is a zip or bin file
+                                filename="${file##*/}"                                             # Remove the path
+                                basename="${filename%.*}"                                          # Remove the extension
+                                print_message "Processing \"$filename\"" debug
 
-        if [ ! -f "extracted_images/$basename" ]; then
+                                # Time the extraction
+                                extraction_start=$(date +%s)
 
-			find "extracted_images/$basename" -type f \( -name "apex_info" -o -name "care_map" -o -name "payload_properties" -c -name "payload" \) -exec rm -f {} +
+                                # Extract/Dump
+                                if [ "${file: -4}" == ".bin" ]; then # If is payload use the Android OTA Dumper
+                                        python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
+                                else # else directly extract the required images
+                                        for image_name in "${IMAGES2EXTRACT[@]}"; do
+                                                print_message "Extracting \"$image_name\"..." debug
+                                                7z e "$file" -o"extracted_images/$basename" "$image_name.img" -r &>/dev/null
+                                        done
+                                fi
 
-            print_message "Dumping \"$basename\"..." debug
-            python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
-        else
-			for image_name in "${IMAGES2EXTRACT[@]}"; do
-				print_message "Extracting \"$image_name\"..." debug
-				7z e "$file" -o"extracted_images/$basename" "$image_name.img" -r &>/dev/null
-			done
-		fi
-    fi
-done
+                                # Time the extraction
+                                extraction_end=$(date +%s)
+                                extraction_runtime=$((extraction_end - extraction_start))
+
+                                # Print the time
+                                print_message "Extraction time: $extraction_runtime seconds" debug
+                        fi
+                fi
+        done
+
+        rm -rf "extracted_archive_images"
+fi
 
 # Extract the images directories
 print_message "\nExtracting images and directories..." info
+for dir in ./extracted_images/*; do # List directory ./*
+        if [ -d "$dir" ]; then             # Check if it is a directory
+                dir=${dir%*/}                     # Remove last /
+                print_message "Processing \"${dir##*/}\"" debug
 
-for file in ./extracted_dir*; do
-    if [ -d "$dir" ]; then
-        dir=${dir%*/}
-        print_message "Processing \"${dir##*/}\"" debug
+                # Time the extraction
+                extraction_start=$(date +%s)
 
-        for image_name in "${IMAGES2EXTRACT[@]}"; do
-            extract_image "$file" "$image_name"
-            rm "$file/$image_name.img"
-        done
+                # Extract all and clean
+                for image_name in "${IMAGES2EXTRACT[@]}"; do
+                        extract_image "$dir" "$image_name"
+                        rm "$dir/$image_name.img"
+                done
 
-        print_message "Building props..." info
-        ./build_props.sh "$file"
-    fi
+                # Time the extraction
+                extraction_end=$(date +%s)
+                extraction_runtime=$((extraction_end - extraction_start))
+
+                # Print the extraction time
+                print_message "Extraction time: $extraction_runtime seconds" debug
+
+                # Build system.prop
+                print_message "Building props..." info
+                ./build_props.sh "$dir"
+        fi
 done
-
