@@ -1,7 +1,7 @@
 # GetProps 
 > get your pif custom! (google pixel images)
 
-### About about other custom images
+### About other custom images
 - now we have zenfone images and pixel images
 - other images will be added soon.
 
