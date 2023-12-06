@@ -61,6 +61,9 @@ jobs:
       - name: Extract Image and build prop
         working-directory: ./getProps
         run: |
+          rm extracted_images/apex_info
+          rm extracted_images/care_map
+
           ./extract_images_custom.sh
           ls extracted_images/
 
