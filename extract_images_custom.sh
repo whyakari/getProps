@@ -33,6 +33,24 @@ for file in ./*; do
 
             # Print the time
             print_message "Extraction time: $extraction_runtime seconds" debug
+        elif [ "${file: -4}" == ".bin" ]; then
+            filename="${file##*/}"
+            basename="${filename%.*}"
+            devicename="${basename%%-*}"
+            print_message "Processing \"$filename\"" debug
+
+            # Time the extraction
+            extraction_start=$(date +%s)
+
+            # Extract/Dump
+            python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
+
+            # Time the extraction
+            extraction_end=$(date +%s)
+            extraction_runtime=$((extraction_end - extraction_start))
+
+            # Print the time
+            print_message "Extraction time: $extraction_runtime seconds" debug
         fi
     fi
 done
@@ -42,7 +60,7 @@ if [ -d "extracted_archive_images" ]; then
 
     for file in ./extracted_archive_images/*; do
         if [ -f "$file" ]; then
-            if [ "${file: -4}" == ".zip" ] || [ "${file: -4}" == ".bin" ]; then
+            if [ "${file: -4}" == ".zip" ]; then
                 filename="${file##*/}"
                 basename="${filename%.*}"
                 print_message "Processing \"$filename\"" debug
@@ -51,14 +69,10 @@ if [ -d "extracted_archive_images" ]; then
                 extraction_start=$(date +%s)
 
                 # Extract/Dump
-                if unzip -l "$file" | grep -q "payload.bin"; then
-                    python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
-                else
-                    for image_name in "${IMAGES2EXTRACT[@]}"; do
-                        print_message "Extracting \"$image_name\"..." debug
-                        7z e "$file" -o"extracted_images/$basename" "$image_name.img" -r &>/dev/null
-                    done
-                fi
+                for image_name in "${IMAGES2EXTRACT[@]}"; do
+                    print_message "Extracting \"$image_name\"..." debug
+                    7z e "$file" -o"extracted_images/$basename" "$image_name.img" -r &>/dev/null
+                done
 
                 # Time the extraction
                 extraction_end=$(date +%s)
