@@ -61,6 +61,8 @@ jobs:
       - name: Extract Image and build prop
         working-directory: ./getProps
         run: |
+          pwd
+          ls
           ./extract_images_custom.sh
           ls extracted_images/
 
