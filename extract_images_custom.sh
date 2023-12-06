@@ -1,4 +1,3 @@
-extract_images.sh
 #!/bin/bash
 
 # Using util_functions.sh
