@@ -50,7 +50,7 @@ to_system_prop "##
 ###
 
 # begin common build properties"
-build_prop to_system_prop "$product_path" "ro.vndk.version"
+build_prop to_system_prop "$product_path" "ro.product.vndk.version"
 build_prop to_system_prop "$product_path" "ro.product.product.brand"
 build_prop to_system_prop "$product_path" "ro.product.product.device"
 build_prop to_system_prop "$product_path" "ro.product.product.manufacturer"
@@ -90,7 +90,7 @@ ro.com.google.ime.system_lm_dir=/product/usr/share/ime/google/d3_lms
 ###
 
 # begin common build properties"
-build_prop to_system_prop "$vendor_path" "ro.vndk.version"
+build_prop to_system_prop "$vendor_path" "ro.vendor.vndk.version"
 build_prop to_system_prop "$vendor_path" "ro.product.first_api_level"
 build_prop to_system_prop "$vendor_path" "ro.product.vendor.brand"
 build_prop to_system_prop "$vendor_path" "ro.product.vendor.device"
@@ -111,7 +111,7 @@ to_system_prop "# end common build properties
 
 # begin ADDITIONAL_VENDOR_PROPERTIES"
 build_prop to_system_prop "$vendor_path" "ro.vendor.build.security_patch"
-build_prop to_system_prop "$vendor_path" "ro.vndk.version"
+build_prop to_system_prop "$vendor_path" "ro.vendor.vndk.version"
 build_prop to_system_prop "$vendor_path" "ro.product.first_api_level"
 to_system_prop "# end ADDITIONAL_VENDOR_PROPERTIES
 

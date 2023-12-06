@@ -37,7 +37,7 @@ BRAND=$(file_getprop build.prop ro.product.brand);
 MODEL=$(file_getprop build.prop ro.product.model);
 FINGERPRINT=$(file_getprop build.prop ro.build.fingerprint);
 BUILD_ID=$(file_getprop build.prop ro.vendor.build.id);
-VNDK_VERSION=$(file_getprop build.prop ro.vndk.version);
+VNDK_VERSION=$(file_getprop build.prop ro.vendor.vndk.version);
 
 [ -z "$PRODUCT" ] && PRODUCT=$(file_getprop build.prop ro.product.system.name);
 [ -z "$DEVICE" ] && DEVICE=$(file_getprop build.prop ro.product.system.device);
@@ -46,7 +46,7 @@ VNDK_VERSION=$(file_getprop build.prop ro.vndk.version);
 [ -z "$MODEL" ] && MODEL=$(file_getprop build.prop ro.product.system.model);
 [ -z "$FINGERPRINT" ] && FINGERPRINT=$(file_getprop build.prop ro.system.build.fingerprint);
 [ -z "$BUILD_ID" ] && BUILD_ID=$(file_getprop build.prop ro.vendor.build.id);
-[ -z "$VNDK_VERSION" ] && VNDK_VERSION=$(file_getprop build.prop ro.vndk.version);
+[ -z "$VNDK_VERSION" ] && VNDK_VERSION=$(file_getprop build.prop ro.vendor.vndk.version);
 
 case $DEVICE in
   generic) die "Generic /system/build.prop values found, rename to system-build.prop and add product-build.prop";;

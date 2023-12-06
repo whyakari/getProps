@@ -80,7 +80,7 @@ jobs:
         run: |
           sh ./gen_custom_pif.sh json build.prop 
           rm build.prop 
-          echo "artifactPath=/home/runner/work/getProps/getProps/getProps/custom.pif.json" >> $GITHUB_ENV
+          echo "artifactPath=/home/runner/work/getProps/getProps/getProps/pif.json" >> $GITHUB_ENV
 
       - name: Upload Pif ${{ matrix.device_name }}
         uses: actions/upload-artifact@v3
