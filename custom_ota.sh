@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[ -f "util_functions.sh" ] && . ./util_functions.sh || { echo "util_functions.sh not found" && exit 1; }
+
 if [ -z "$1" ]; then
   echo "No ota device name provided to be downloaded" >&2
   exit 1
