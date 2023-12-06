@@ -17,7 +17,10 @@ for file in "$extracted_dir"/*; do
     if [ -f "$file" ]; then
         filename="${file##*/}"
         basename="${filename%.*}"
-        mv -f "$file" "$extracted_dir/$basename.bin"
+
+        if [ "$basename" != "payload" ]; then
+            mv -f "$file" "$extracted_dir/$basename.bin"
+        fi
     fi
 done
 
