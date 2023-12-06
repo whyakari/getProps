@@ -47,6 +47,10 @@ jobs:
         run: |
           pip3 install -r api/asus/requirements.txt
           nohup python3 api/asus/api.py &
+
+      - name: Download last ota ${{ github.event.inputs.device_name }}
+        working-directory: ./getProps
+        run: |
           python3 custom_ota_download.py ${{ github.event.inputs.device_name }}
 
       - name: Extract Image and build prop
