@@ -4,57 +4,57 @@
 
 print_message "Extracting images from archives..." info
 for file in ./*; do
-	if [ -f "$file" ]; then
-		if [ "${file: -4}" == ".zip" ]; then
-			filename="${file##*/}"
+    if [ -f "$file" ]; then
+        if [ "${file: -4}" == ".zip" ]; then
+            filename="${file##*/}"
             basename="${filename%.*}"
             devicename="${basename%%-*}"
             print_message "Processing \"$filename\"" debug
 
             extraction_start=$(date +%s)
-            
-            if [[ ! "${basename##"$devicename"-ota-*}" ]]; then 
-				7z e "$file" -o"extracted_archive_images" "payload.bin" -r &>/dev/null
+
+            if unzip -l "$file" | grep -q "payload.bin"; then
+                unzip -q "$file" -d "extracted_archive_images"
                 mv -f "extracted_archive_images/payload.bin" "extracted_archive_images/$basename.bin"
             else
-				7z e "$file" -o"extracted_archive_images" "*/*.zip" -r -y &>/dev/null
+                unzip -q "$file" -d "extracted_archive_images"
             fi
-            
+
             rm "$file"
 
             extraction_end=$(date +%s)
             extraction_runtime=$((extraction_end - extraction_start))
-            
+
             print_message "Extraction time: $extraction_runtime seconds" debug
         fi
     fi
 done
 
-if [ -d "extracted_archive_images" ]; then 
-	print_message "\nExtracting/Dumping images from \"extracted_archive_images\"..." info
+if [ -d "extracted_archive_images" ]; then
+    print_message "\nExtracting/Dumping images from \"extracted_archive_images\"..." info
 
     for file in ./extracted_archive_images/*; do
-		if [ -f "$file" ]; then
-			if [ "${file: -4}" == ".zip" ] || [ "${file: -4}" == ".bin" ]; then
-				filename="${file##*/}"
-                basename="${filename%.*}" 
-				print_message "Processing \"$filename\"" debug
+        if [ -f "$file" ]; then
+            if [ "${file: -4}" == ".zip" ] || [ "${file: -4}" == ".bin" ]; then
+                filename="${file##*/}"
+                basename="${filename%.*}"
+                print_message "Processing \"$filename\"" debug
 
                 extraction_start=$(date +%s)
 
-            if [ "${file: -4}" == ".bin" ]; then
-				python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
-            else
-                for image_name in "${IMAGES2EXTRACT[@]}"; do
-                    print_message "Extracting \"$image_name\"..." debug
-                    7z e "$file" -o"extracted_images/$basename" "$image_name.img" -r &>/dev/null
-                done
-            fi
-            
-			extraction_end=$(date +%s)
-            extraction_runtime=$((extraction_end - extraction_start))
+                if [ "${file: -4}" == ".bin" ]; then
+                    python3 ota_dumper/extract_android_ota_payload.py "$file" "extracted_images/$basename"
+                else
+                    for image_name in "${IMAGES2EXTRACT[@]}"; do
+                        print_message "Extracting \"$image_name\"..." debug
+                        unzip -q "$file" -d "extracted_images/$basename" "$image_name.img"
+                    done
+                fi
 
-            print_message "Extraction time: $extraction_runtime seconds" debug
+                extraction_end=$(date +%s)
+                extraction_runtime=$((extraction_end - extraction_start))
+
+                print_message "Extraction time: $extraction_runtime seconds" debug
             fi
         fi
     done
@@ -64,8 +64,8 @@ fi
 
 print_message "\nExtracting images and directories..." info
 for dir in ./extracted_images/*; do
-    if [ -d "$dir" ]; then 
-		dir=${dir%*/}
+    if [ -d "$dir" ]; then
+        dir=${dir%*/}
         print_message "Processing \"${dir##*/}\"" debug
 
         extraction_start=$(date +%s)
