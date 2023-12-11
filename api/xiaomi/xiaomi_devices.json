@@ -1,5 +1,7 @@
 {
 	"xiaomi": {
-		"tulip": "https://dumps.tadiphone.dev/dumps/xiaomi/tulip.git"
+		"tulip": "https://dumps.tadiphone.dev/dumps/xiaomi/tulip/-/raw/tulip-user-9-PKQ1.180904.001-V12.0.1.0.PEKMIXM-release-keys/system/build.prop",
+		"beryllium": "https://dumps.tadiphone.dev/dumps/xiaomi/beryllium/-/raw/beryllium-user-10-QKQ1.190828.002-V12.0.3.0.QEJMIXM-release-keys/system/system/build.prop",
+		"ginkgo": "https://dumps.tadiphone.dev/dumps/xiaomi/ginkgo/-/raw/ginkgo-user-10-QKQ1.200114.002-V12.0.6.0.QCOEUXM-release-keys/system/system/build.prop"
 	}
 }
