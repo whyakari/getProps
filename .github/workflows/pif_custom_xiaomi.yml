@@ -13,6 +13,10 @@ on:
           - ginkgo
           - tulip
           - beryllium
+          - lisa 
+          - lavender 
+          - mona 
+          - mido
 
 jobs:
   onDispatch:
