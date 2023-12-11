@@ -6,7 +6,7 @@ on:
       device_name:
         description: "Device Name"
         required: true
-        default: "cheetah"
+        default: "zenfone-7"
         type: choice
         
         options:
