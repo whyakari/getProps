@@ -58,6 +58,7 @@ chmod +x *.sh
 # How to contribute
 1. clone this repository by forking
 2. add other brands in `api/brand`
-3. test locally with flask (assuming that everything is in order.)
-4. (not yet) enable your fork's CI and do a test
-5. Lastly send your PR's and I will check.
+   - maintain the standard of `brand_devices.json`
+4. test locally with flask (assuming that everything is in order.)
+5. (not yet) enable your fork's CI and do a test
+6. Lastly send your PR's and I will check.
