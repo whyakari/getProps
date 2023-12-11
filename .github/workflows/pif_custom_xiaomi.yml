@@ -1,0 +1,76 @@
+name: Build Prop Xiaomi
+
+on:
+  workflow_dispatch:
+    inputs:
+      device_name:
+        description: "Device Name"
+        required: true
+        default: "cheetah"
+        type: choice
+        
+        options:
+          - ginkgo
+          - tulip
+          - beryllium
+
+jobs:
+  onDispatch:
+    name: On Dispatch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Clone Repo getProps
+        uses: whyakari/github-repo-action@v3.1
+        with:
+          branch: 'main'
+          owner: 'whyakari'
+          repository: 'getProps'
+
+      - name: Install dos2unix python3 python3-pip
+        uses: daaku/gh-action-apt-install@v4
+        with:
+          packages: dos2unix python3 python3-pip
+
+      - name: Install protobuf
+        working-directory: ./getProps
+        run: |
+          pip install --upgrade pip
+          pip3 install -Iv protobuf==3.20.3
+
+      - name: Make executable all script
+        working-directory: ./getProps
+        run: |
+          chmod +x *.sh
+
+      - name: Start Server Flask
+        working-directory: ./getProps
+        run: |
+          pip3 install -r api/xiaomi/requirements.txt
+          nohup python3 api/xiaomi/api.py &
+
+      - name: Server Test Flask
+        working-directory: ./getProps
+        run: |
+          curl http://127.0.0.1:5000
+
+      - name: Download last ota ${{ github.event.inputs.device_name }}
+        working-directory: ./getProps
+        run: |
+          python3 ota_xiaomi.py ${{ github.event.inputs.device_name }}
+
+      - name: Create Pif Json 
+        working-directory: ./getProps
+        run: |
+          sh ./gen_custom_pif.sh json build.prop 
+          rm build.prop 
+          echo "artifactPath=/home/runner/work/getProps/getProps/getProps/pif.json" >> $GITHUB_ENV
+
+      - name: Upload Pif ${{ matrix.device_name }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact-pif
+          path: ${{ env.artifactPath }}
+          if-no-files-found: error
