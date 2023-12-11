@@ -1,4 +1,4 @@
-name: Build Prop Asus/Zenfone
+name: Build Asus/Zenfone
 
 on:
   workflow_dispatch:
