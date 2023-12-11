@@ -1,4 +1,4 @@
-name: Build Pif Matrix
+name: Build Matrix Google Pixel
 
 on:
   workflow_dispatch:
