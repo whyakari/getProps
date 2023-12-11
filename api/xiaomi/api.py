@@ -14,7 +14,7 @@ def get_v1():
 
 @app.route('/v1/xiaomi/<device>')
 def get_devices(device):
-    with open('xiaomi_devices.json', 'r', encoding='utf-8') as file:
+    with open('api/xiaomi/xiaomi_devices.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
 
     if 'xiaomi' in data and device in data['xiaomi']:
