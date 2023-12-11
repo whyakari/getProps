@@ -1,4 +1,4 @@
-name: Build Prop Xiaomi
+name: Build Xiaomi
 
 on:
   workflow_dispatch:
