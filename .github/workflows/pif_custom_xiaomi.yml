@@ -6,9 +6,9 @@ on:
       device_name:
         description: "Device Name"
         required: true
-        default: "cheetah"
+        default: "ginkgo"
         type: choice
-        
+ 
         options:
           - ginkgo
           - tulip
