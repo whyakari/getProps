@@ -1,4 +1,4 @@
-name: Build Prop Pixel Google
+name: Build Pixel Google
 
 on:
   workflow_dispatch:
