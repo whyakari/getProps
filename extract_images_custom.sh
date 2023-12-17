@@ -81,6 +81,6 @@ for dir in ./extracted_images/*; do
         print_message "Extraction time: $extraction_runtime seconds" debug
 
         print_message "Building props..." info
-        ./build_props.sh "$dir"
+        ./props.sh "$dir"
     fi
 done

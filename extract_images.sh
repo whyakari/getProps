@@ -98,6 +98,6 @@ for dir in ./extracted_images/*; do # List directory ./*
 
 		# Build system.prop
 		print_message "Building props..." info
-		./build_props.sh "$dir"
+		./props.sh "$dir"
 	fi
 done
