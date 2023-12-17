@@ -32,7 +32,7 @@ item "Parsing build.prop(s) ...";
 
 PRODUCT=$(file_getprop build.prop ro.product.name);
 DEVICE=$(file_getprop build.prop ro.product.device);
-MANUFACTURER=$(file_getprop build.prop ro.product.system_ext.manufacturer);
+MANUFACTURER=$(file_getprop build.prop ro.product.manufacturer);
 BRAND=$(file_getprop build.prop ro.product.brand);
 MODEL=$(file_getprop build.prop ro.product.model);
 FINGERPRINT=$(file_getprop build.prop ro.build.fingerprint);
