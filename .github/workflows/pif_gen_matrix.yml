@@ -10,7 +10,7 @@ jobs:
     name: On Schedule
     strategy:
       matrix:
-        device_name: [sailfish, sunfish, coral, flame, bramble, redfin, husky, shiba, cheetah, raven]
+        device_name: [redfin, husky, shiba, cheetah, raven]
 
     runs-on: ubuntu-latest
     steps:
