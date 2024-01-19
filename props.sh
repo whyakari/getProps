@@ -81,6 +81,9 @@ build_prop to_system_prop "$system_path" "ro.product.carrier"
 # Save the system.prop file
 echo -n "${system_prop::-1}" >"$dir/system.prop"
 
+# Save the module.prop file
+echo -n "${module_prop::-1}" >"$dir/module.prop"
+
 # Display information about prop
 print_message "[$device_build_description] ($device_name) Prop" debug
 
