@@ -56,11 +56,6 @@ jobs:
           echo ::set-output name=final_name::$(cat build.txt)
         working-directory: ./getProps
 
-      - name: Copy prop to result ${{ matrix.device_name }}
-        working-directory: ./getProps
-        run: |
-          mv system.prop build.prop
-
       - name: Create Pif ${{ matrix.device_name }}
         working-directory: ./getProps
         run: |
