@@ -59,7 +59,7 @@ jobs:
       - name: Copy prop to result ${{ matrix.device_name }}
         working-directory: ./getProps
         run: |
-          cp ./**/**/{system}.prop .
+          cp ./**/**/{system,module}.prop .
           mv system.prop build.prop
 
       - name: Create Pif ${{ matrix.device_name }}
